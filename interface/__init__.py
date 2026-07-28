@@ -7,6 +7,13 @@ def cabecalho(txt):
     print(f'{txt:^40}')
     print('-='*30)
 
+def mensagem_nao_existe_materia():
+    txt = "NENHUMA MATÉRIA REGISTRADA."
+    print('-='*30)
+    print(f'{txt:^40}')
+    print('-='*30)
+    time.sleep(2)
+
 def leia_int_positivo(msg = ''):
 
     while True:
@@ -47,12 +54,12 @@ def alterar_materia_opcoes():
 
     cont = 0
 
-    opcoes = ['Alterar nome', 'Alterar quantidade de faltas','Alterar limite de faltas', 'Voltar']
+    opcoes = ['Alterar nome', 'Alterar quantidade de faltas','Alterar limite de faltas', 'Excluir matéria', 'Voltar']
 
     for e in opcoes:
         cont +=1
         print(f'{cont} - {e}')
-        time.sleep(0.2)
+        time.sleep(0.6)
 
     print('-'*20)
     opcao = leia_int_positivo('Opção selecionada: ')

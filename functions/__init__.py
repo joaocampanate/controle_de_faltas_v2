@@ -21,6 +21,12 @@ def inserir_materia():
     materia = Materia(nome_materia, 0, limite_faltas)
     return (materia)
 
+def existe_alguma_materia(cursor):
+    cursor.execute(
+        "SELECT 1 FROM Materias;"
+    )
+    return cursor.fetchone() is not None
+
 def materia_existe_nome(cursor, materia):
     cursor.execute(
         "SELECT 1 FROM Materias WHERE nome_materia = ?;",
@@ -76,6 +82,17 @@ def alterar_materia(cursor):
             sleep(0.3)
             cursor.execute("UPDATE Materias SET lim_faltas = ? WHERE id = ?;",(novo_lim,id))
             print("Operação solicitada com SUCESSO!")
+
+        elif opcao == 4:
+            opcao = confirmar_resposta("Tem certeza que deseja apagar a matéria? [S/N]: ")
+            sleep(0.3)
+            if opcao:
+                cursor.execute("DELETE FROM Materias WHERE id = ?;",(id,))
+                print("MATÉRIA APAGADA!")
+                sleep(0.3)
+            else:
+                print("OPERAÇÃO CANCELADA!")
+                sleep(0.7)
 
     else:
         print('Este id não corresponde a nenhuma matéria.')

@@ -14,6 +14,7 @@ functions.criar_tabela_materias(cursor=cursor1)
 conexao1.commit()
 
 while True:
+    existe_materia = functions.existe_alguma_materia(cursor=cursor1)
     console.clear()
     opcao_escolhida = interface.criar_menu(txt="CONTROLE DE FALTAS V2")
     try:
@@ -30,33 +31,42 @@ while True:
                 resposta = interface.confirmar_resposta("Deseja adicionar mais matérias? [S/N]: ")
 
         elif opcao_escolhida == 2:
-            resposta = True
-            while resposta:
-                conexao1.commit()
-                console.clear()
-                functions.ver_materias_e_faltas(cursor=cursor1)
-                functions.alterar_materia(cursor=cursor1)
-                conexao1.commit()
-                console.clear()
-                functions.ver_materias_e_faltas(cursor=cursor1)
-                resposta = interface.confirmar_resposta("Deseja alterar mais matérias? [S/N]: ")
+            if existe_materia:
+                resposta = True
+                while resposta:
+                    conexao1.commit()
+                    console.clear()
+                    functions.ver_materias_e_faltas(cursor=cursor1)
+                    functions.alterar_materia(cursor=cursor1)
+                    conexao1.commit()
+                    console.clear()
+                    functions.ver_materias_e_faltas(cursor=cursor1)
+                    resposta = interface.confirmar_resposta("Deseja alterar ou excluir mais matérias? [S/N]: ")
+            else:
+                interface.mensagem_nao_existe_materia()
 
         elif opcao_escolhida == 3:
-            console.clear()
-            functions.ver_materias_e_faltas(cursor=cursor1)
-            input("Digite qualquer tecla para continuar: ")
+            if existe_materia:
+                console.clear()
+                functions.ver_materias_e_faltas(cursor=cursor1)
+                input("Digite qualquer tecla para continuar: ")
+            else:
+                interface.mensagem_nao_existe_materia()
 
         elif opcao_escolhida == 4:
-            resposta = True
-            while resposta:
-                conexao1.commit()
-                console.clear()
-                functions.ver_materias_e_faltas(cursor=cursor1)
-                functions.registrar_falta(cursor=cursor1)
-                conexao1.commit()
-                console.clear()
-                functions.ver_materias_e_faltas(cursor=cursor1)
-                resposta = interface.confirmar_resposta("Deseja registrar mais faltas? [S/N]: ")
+            if existe_materia:
+                resposta = True
+                while resposta:
+                    conexao1.commit()
+                    console.clear()
+                    functions.ver_materias_e_faltas(cursor=cursor1)
+                    functions.registrar_falta(cursor=cursor1)
+                    conexao1.commit()
+                    console.clear()
+                    functions.ver_materias_e_faltas(cursor=cursor1)
+                    resposta = interface.confirmar_resposta("Deseja registrar mais faltas? [S/N]: ")
+            else:
+                interface.mensagem_nao_existe_materia()
 
         elif opcao_escolhida == 5:
             console.clear()
