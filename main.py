@@ -1,8 +1,12 @@
 import functions
 import interface
 import sqlite3
+from pathlib import Path
 
-conexao1 = sqlite3.connect('controle_de_faltas_v2/data/faltas.db')
+BASE_DIR = Path(__file__).resolve().parent
+DB_PATH = BASE_DIR / "data" / "faltas.db"
+
+conexao1 = sqlite3.connect(DB_PATH)
 cursor1 = conexao1.cursor()
 functions.criar_tabela_materias(cursor=cursor1)
 conexao1.commit()
