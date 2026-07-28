@@ -15,15 +15,18 @@ while True:
     opcao_escolhida = interface.criarmenu(txt="CONTROLE DE FALTAS V2")
     try:
         if opcao_escolhida == 1:
+            functions.ver_materias_e_faltas(cursor=cursor1)
             functions.registrar_materia(cursor=cursor1)
 
         elif opcao_escolhida == 2:
+            functions.ver_materias_e_faltas(cursor=cursor1)
             functions.alterar_materia(cursor=cursor1)
 
         elif opcao_escolhida == 3:
             functions.ver_materias_e_faltas(cursor=cursor1)
 
         elif opcao_escolhida == 4:
+            functions.ver_materias_e_faltas(cursor=cursor1)
             functions.registrar_falta(cursor=cursor1)
 
         elif opcao_escolhida == 5:
@@ -35,4 +38,5 @@ while True:
         print(f"Ocorreu um erro : {e}")
     else:
         conexao1.commit()
+    print("\n"*50)
 print("Tchau, até mais!")
