@@ -44,10 +44,10 @@ def registrar_materia(cursor):
     if not materia_existe_nome(cursor, materia.nome):
         cursor.execute("INSERT INTO Materias (nome_materia,qtd_faltas,lim_faltas) VALUES (?,?,?);",(materia.nome,materia.faltas,materia.lim_faltas))
         print("Operação solicitada com sucesso!")
-        sleep(1.5)
+        sleep(0.5)
     else:
         print("Essa matéria já existe no sistema! (use a opção de ALTERAR MATÉRIA caso queira ALTERAR algum dado sobre a matéria.)")
-        sleep(1.5)
+        sleep(0.5)
 
 
 def alterar_materia(cursor):

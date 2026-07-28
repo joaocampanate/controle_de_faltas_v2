@@ -24,6 +24,9 @@ while True:
                 console.clear()
                 functions.ver_materias_e_faltas(cursor=cursor1)
                 functions.registrar_materia(cursor=cursor1)
+                conexao1.commit()
+                console.clear()
+                functions.ver_materias_e_faltas(cursor=cursor1)
                 resposta = interface.confirmar_resposta("Deseja adicionar mais matérias? [S/N]: ")
 
         elif opcao_escolhida == 2:
@@ -33,6 +36,9 @@ while True:
                 console.clear()
                 functions.ver_materias_e_faltas(cursor=cursor1)
                 functions.alterar_materia(cursor=cursor1)
+                conexao1.commit()
+                console.clear()
+                functions.ver_materias_e_faltas(cursor=cursor1)
                 resposta = interface.confirmar_resposta("Deseja alterar mais matérias? [S/N]: ")
 
         elif opcao_escolhida == 3:
@@ -47,6 +53,9 @@ while True:
                 console.clear()
                 functions.ver_materias_e_faltas(cursor=cursor1)
                 functions.registrar_falta(cursor=cursor1)
+                conexao1.commit()
+                console.clear()
+                functions.ver_materias_e_faltas(cursor=cursor1)
                 resposta = interface.confirmar_resposta("Deseja registrar mais faltas? [S/N]: ")
 
         elif opcao_escolhida == 5:

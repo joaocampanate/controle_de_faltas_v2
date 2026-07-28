@@ -26,7 +26,7 @@ def criar_menu(txt):
     time.sleep(0.2)
     cont = 0
 
-    opcoes = ['Adicionar matéria', 'Alterar matéria','Ver faltas e matérias', 'Registrar faltas', 'Apagar todos os dados', 'Sair do programa']
+    opcoes = ['Adicionar matéria', 'Alterar ou excluir matéria','Ver faltas e matérias', 'Registrar faltas', 'Apagar todos os dados', 'Sair do programa']
 
     for e in opcoes:
         cont +=1
