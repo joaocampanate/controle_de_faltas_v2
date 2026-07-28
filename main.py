@@ -3,13 +3,10 @@ from interface import *
 from classes import *
 import sqlite3
 
-conexao = sqlite3.connect('data/faltas.db')
-cursor1 = conexao.cursor()
-cursor1.execute('''CREATE TABLE IF NOT EXISTS Materias (
-id INTEGER PRIMARY KEY,
-nome_materia TEXT NOT NULL UNIQUE,
-qtd_faltas INTEGER NOT NULL,
-lim_faltas INTEGER NOT NULL);''')
+conexao1 = sqlite3.connect('data/faltas.db')
+cursor1 = conexao1.cursor()
+criar_tabela_materias(cursor=cursor1)
+conexao1.commit()
 
 while True:
     opcao_escolhida = criarmenu("CONTROLE DE FALTAS V2")
@@ -34,5 +31,5 @@ while True:
     except Exception as e:
         print(f"Ocorreu um erro : {e}")
     else:
-        conexao.commit()
+        conexao1.commit()
 print("Tchau, até mais!")

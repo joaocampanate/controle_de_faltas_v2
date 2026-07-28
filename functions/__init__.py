@@ -1,6 +1,14 @@
 from classes import *
 from interface import leiaInt
 
+def criar_tabela_materias(cursor):
+    cursor.execute('''CREATE TABLE IF NOT EXISTS Materias (
+    id INTEGER PRIMARY KEY,
+    nome_materia TEXT NOT NULL UNIQUE,
+    qtd_faltas INTEGER NOT NULL,
+    lim_faltas INTEGER NOT NULL);''')
+
+
 def inserir_materia():
     nome_materia = str(input("Digite o nome da matéria: "))
     limite_faltas = leiaInt("Digite o limite de faltas da matéria: ")
