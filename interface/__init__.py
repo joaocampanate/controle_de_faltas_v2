@@ -12,7 +12,7 @@ def leia_int_positivo(msg = ''):
     while True:
         n = str(input(msg))
         try:
-            int(n)
+            n = int(n)
         except:
             print('Valor inválido.')
             continue
