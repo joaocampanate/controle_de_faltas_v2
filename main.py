@@ -23,7 +23,7 @@ while True:
             functions.registrar_falta(cursor=cursor1)
 
         elif opcao_escolhida == 5:
-            continue
+            functions.apagar_todos_dados(cursor=cursor1)
         
         elif opcao_escolhida == 6:
             break

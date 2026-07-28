@@ -90,4 +90,8 @@ def registrar_falta(cursor):
         print("Este id não corresponde a nenhuma matéria.")
 
 def apagar_todos_dados(cursor):
-    pass
+    opcao = confirmarResposta("Tem certeza que deseja apagar TODOS os dados? [S/N]: ")
+    if opcao:
+        cursor.execute("DELETE FROM Materias;")
+        print("DADOS APAGADOS!")
+    
