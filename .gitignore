@@ -1,0 +1,13 @@
+# Banco de dados
+data/*.db
+
+#Cache do pyhon
+__pycache__/
+*.pyc
+
+#Ambiente virtual
+.venv/
+venv/
+
+#Configuração VS Code
+.vscode/

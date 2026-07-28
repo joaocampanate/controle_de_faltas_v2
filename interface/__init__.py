@@ -1,4 +1,4 @@
-from time import sleep
+import time
 from rich.table import Table
 
 def cabecalho(txt):
@@ -7,7 +7,7 @@ def cabecalho(txt):
     print(f'{txt:^40}')
     print('-='*30)
 
-def leiaInt(msg = ''):
+def leia_int_positivo(msg = ''):
 
     while True:
         n = str(input(msg))
@@ -17,12 +17,13 @@ def leiaInt(msg = ''):
             print('Valor inválido.')
             continue
         else:
-            return int(n)
+            if n >= 0:
+                return int(n)
 
-def criarmenu(txt):
+def criar_menu(txt):
 
     cabecalho(txt)
-    sleep(0.2)
+    time.sleep(0.2)
     cont = 0
 
     opcoes = ['Adicionar matéria', 'Alterar matéria','Ver faltas e matérias', 'Registrar faltas', 'Apagar todos os dados', 'Sair do programa']
@@ -30,15 +31,15 @@ def criarmenu(txt):
     for e in opcoes:
         cont +=1
         print(f'{cont} - {e}')
-        sleep(0.2)
+        time.sleep(0.2)
 
     print('-'*20)
-    opcao = leiaInt('Opção selecionada: ')
+    opcao = leia_int_positivo('Opção selecionada: ')
     print('-'*20)
-    sleep(0.2)
+    time.sleep(0.2)
 
     while opcao not in range(1, cont+1):
-        opcao = leiaInt('Opção inválida. Digite novamente: ')
+        opcao = leia_int_positivo('Opção inválida. Digite novamente: ')
 
     return opcao
 
@@ -51,19 +52,19 @@ def alterar_materia_opcoes():
     for e in opcoes:
         cont +=1
         print(f'{cont} - {e}')
-        sleep(0.2)
+        time.sleep(0.2)
 
     print('-'*20)
-    opcao = leiaInt('Opção selecionada: ')
+    opcao = leia_int_positivo('Opção selecionada: ')
     print('-'*20)
-    sleep(0.2)
+    time.sleep(0.2)
 
     while opcao not in range(1, cont+1):
-        opcao = leiaInt('Opção inválida. Digite novamente: ')
+        opcao = leia_int_positivo('Opção inválida. Digite novamente: ')
 
     return opcao
 
-def confirmarResposta(msg):
+def confirmar_resposta(msg):
     resposta = str(input(msg)).upper().strip()
     while resposta != 'S' and resposta != 'N':
         resposta = str(input('Resposta inválida. Tente novamente: ')).upper().strip()
