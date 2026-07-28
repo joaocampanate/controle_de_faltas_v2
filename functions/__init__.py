@@ -47,20 +47,30 @@ def alterar_materia(cursor):
             novo_nome = str(input("Digite o novo nome: "))
             if not materia_existe_nome(cursor, novo_nome):
                 cursor.execute("UPDATE Materias SET nome_materia = ? WHERE id = ?;",(novo_nome,id))
+                print("Operação concluída com SUCESSO!")
             else:
                 print("Esse nome já existe!")
 
         elif opcao == 2:
             nova_qtd = leiaInt("Digite a nova quantidade de faltas: ")
             cursor.execute("UPDATE Materias SET qtd_faltas = ? WHERE id = ?;",(nova_qtd,id))
+            print("Operação concluída com SUCESSO!")
 
         elif opcao == 3:
             novo_lim = leiaInt("Digite o novo limite de faltas: ")
             cursor.execute("UPDATE Materias SET lim_faltas = ? WHERE id = ?;",(novo_lim,id))
+            print("Operação concluída com SUCESSO!")
 
     else:
         print('Este id não corresponde a nenhuma matéria.')
 
-
+def registrar_falta(cursor):
+    id = leiaInt("Digite o id da matéria que deseja registrar faltas: ")
+    if materia_existe_id(cursor, id):
+        faltas = leiaInt("Quantas faltas deseja registrar?: ")
+        cursor.execute("UPDATE Materias SET qtd_faltas = qtd_faltas + ? WHERE id = ?;",(faltas,id))
+        print("Operação concluída com SUCESSO!")
+    else:
+        print("Este id não corresponde a nenhuma matéria.")
 
 

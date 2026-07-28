@@ -20,7 +20,7 @@ while True:
             continue
 
         elif opcao_escolhida == 4:
-            continue
+            functions.registrar_falta(cursor=cursor1)
 
         elif opcao_escolhida == 5:
             continue
