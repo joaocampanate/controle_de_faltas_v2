@@ -7,7 +7,7 @@ conexao = sqlite3.connect('data/faltas.db')
 cursor1 = conexao.cursor()
 cursor1.execute('''CREATE TABLE IF NOT EXISTS Materias (
 id INTEGER PRIMARY KEY,
-nome_materia TEXT NOT NULL,
+nome_materia TEXT NOT NULL UNIQUE,
 qtd_faltas INTEGER NOT NULL,
 lim_faltas INTEGER NOT NULL);''')
 
