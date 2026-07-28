@@ -32,7 +32,7 @@ while True:
         elif opcao_escolhida == 6:
             break
     except Exception as e:
-        print("Ocorreu um erro : {e}")
+        print(f"Ocorreu um erro : {e}")
     else:
         conexao.commit()
 print("Tchau, até mais!")

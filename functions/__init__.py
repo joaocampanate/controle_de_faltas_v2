@@ -10,7 +10,7 @@ def inserir_materia():
 def materia_existe(cursor, materia):
     cursor.execute(
         "SELECT 1 FROM Materias WHERE nome_materia = ?;",
-        (materia)
+        (materia,)
     )
     return cursor.fetchone() is not None
 
