@@ -2,7 +2,7 @@ import functions
 import interface
 import sqlite3
 
-conexao1 = sqlite3.connect('data/faltas.db')
+conexao1 = sqlite3.connect('controle_de_faltas_v2/data/faltas.db')
 cursor1 = conexao1.cursor()
 functions.criar_tabela_materias(cursor=cursor1)
 conexao1.commit()
