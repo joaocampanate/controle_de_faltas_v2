@@ -15,17 +15,52 @@ def inserir_materia():
     materia = Materia(nome_materia, 0, limite_faltas)
     return (materia)
 
-def materia_existe(cursor, materia):
+def materia_existe_nome(cursor, materia):
     cursor.execute(
         "SELECT 1 FROM Materias WHERE nome_materia = ?;",
         (materia,)
     )
     return cursor.fetchone() is not None
 
+def materia_existe_id(cursor, id):
+    cursor.execute(
+        "SELECT 1 FROM Materias WHERE id = ?;",
+        (id,)
+    )
+    return cursor.fetchone() is not None
+
+    # Opções do menu
+
 def registrar_materia(cursor):
     materia = inserir_materia()
-    if not materia_existe(cursor, materia.nome):
-        cursor.execute("INSERT INTO Materias (nome_materia,qtd_faltas,lim_faltas) VALUES (?,?,?)",(materia.nome,materia.faltas,materia.lim_faltas))
+    if not materia_existe_nome(cursor, materia.nome):
+        cursor.execute("INSERT INTO Materias (nome_materia,qtd_faltas,lim_faltas) VALUES (?,?,?);",(materia.nome,materia.faltas,materia.lim_faltas))
         print("Matéria adicionada!")
     else:
         print("A matéria já existe!")
+
+def alterar_materia(cursor):
+    id = leiaInt("Digite o id da matéria que deseja alterar: ")
+    if materia_existe_id(cursor, id):
+        opcao = alterar_materia_opcoes()
+        if opcao == 1:
+            novo_nome = str(input("Digite o novo nome: "))
+            if not materia_existe_nome(cursor, novo_nome):
+                cursor.execute("UPDATE Materias SET nome_materia = ? WHERE id = ?;",(novo_nome,id))
+            else:
+                print("Esse nome já existe!")
+
+        elif opcao == 2:
+            nova_qtd = leiaInt("Digite a nova quantidade de faltas: ")
+            cursor.execute("UPDATE Materias SET qtd_faltas = ? WHERE id = ?;",(nova_qtd,id))
+
+        elif opcao == 3:
+            novo_lim = leiaInt("Digite o novo limite de faltas: ")
+            cursor.execute("UPDATE Materias SET lim_faltas = ? WHERE id = ?;",(novo_lim,id))
+
+    else:
+        print('Este id não corresponde a nenhuma matéria.')
+
+
+
+

@@ -8,13 +8,13 @@ functions.criar_tabela_materias(cursor=cursor1)
 conexao1.commit()
 
 while True:
-    opcao_escolhida = interface.criarmenu("CONTROLE DE FALTAS V2")
+    opcao_escolhida = interface.criarmenu(txt="CONTROLE DE FALTAS V2")
     try:
         if opcao_escolhida == 1:
             functions.registrar_materia(cursor=cursor1)
 
         elif opcao_escolhida == 2:
-            continue
+            functions.alterar_materia(cursor=cursor1)
 
         elif opcao_escolhida == 3:
             continue

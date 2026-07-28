@@ -21,7 +21,7 @@ def leiaInt(msg = ''):
 def criarmenu(txt):
 
     cabecalho(txt)
-    sleep(1)
+    sleep(0.2)
     cont = 0
 
     opcoes = ['Adicionar matéria', 'Alterar matéria','Ver faltas e matérias', 'Registrar faltas', 'Apagar todos os dados', 'Sair do programa']
@@ -29,12 +29,33 @@ def criarmenu(txt):
     for e in opcoes:
         cont +=1
         print(f'{cont} - {e}')
-        sleep(0.5)
+        sleep(0.2)
 
     print('-'*20)
     opcao = leiaInt('Opção selecionada: ')
     print('-'*20)
-    sleep(0.5)
+    sleep(0.2)
+
+    while opcao not in range(1, cont+1):
+        opcao = leiaInt('Opção inválida. Digite novamente: ')
+
+    return opcao
+
+def alterar_materia_opcoes():
+
+    cont = 0
+
+    opcoes = ['Alterar nome', 'Alterar quantidade de faltas','Alterar limite de faltas', 'Voltar']
+
+    for e in opcoes:
+        cont +=1
+        print(f'{cont} - {e}')
+        sleep(0.2)
+
+    print('-'*20)
+    opcao = leiaInt('Opção selecionada: ')
+    print('-'*20)
+    sleep(0.2)
 
     while opcao not in range(1, cont+1):
         opcao = leiaInt('Opção inválida. Digite novamente: ')
