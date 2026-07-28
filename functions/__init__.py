@@ -1,5 +1,6 @@
+from time import sleep
 from classes import Materia
-from interface import leia_int_positivo, alterar_materia_opcoes, confirmar_resposta
+from interface import leia_int_positivo, alterar_materia_opcoes, confirmar_resposta, cabecalho
 from rich.table import Table
 from rich.console import Console
 console = Console()
@@ -14,7 +15,9 @@ def criar_tabela_materias(cursor):
 
 def inserir_materia():
     nome_materia = str(input("Digite o nome da matéria: "))
+    sleep(0.7)
     limite_faltas = leia_int_positivo("Digite o limite de faltas da matéria: ")
+    sleep(0.7)
     materia = Materia(nome_materia, 0, limite_faltas)
     return (materia)
 
@@ -35,37 +38,48 @@ def materia_existe_id(cursor, id):
     # Opções do menu
 
 def registrar_materia(cursor):
+
+    cabecalho("REGISTRO DE MATÉRIAS")
     materia = inserir_materia()
     if not materia_existe_nome(cursor, materia.nome):
         cursor.execute("INSERT INTO Materias (nome_materia,qtd_faltas,lim_faltas) VALUES (?,?,?);",(materia.nome,materia.faltas,materia.lim_faltas))
-        print("Matéria adicionada!")
+        print("Operação solicitada com sucesso!")
+        sleep(1.5)
     else:
-        print("A matéria já existe!")
+        print("Essa matéria já existe no sistema! (use a opção de ALTERAR MATÉRIA caso queira ALTERAR algum dado sobre a matéria.)")
+        sleep(1.5)
+
 
 def alterar_materia(cursor):
+
+    cabecalho("ALTERAÇÃO DE MATÉRIA REGISTRADA")
     id = leia_int_positivo("Digite o id da matéria que deseja alterar: ")
     if materia_existe_id(cursor, id):
         opcao = alterar_materia_opcoes()
         if opcao == 1:
             novo_nome = str(input("Digite o novo nome: "))
+            sleep(0.3)
             if not materia_existe_nome(cursor, novo_nome):
                 cursor.execute("UPDATE Materias SET nome_materia = ? WHERE id = ?;",(novo_nome,id))
-                print("Operação concluída com SUCESSO!")
+                print("Operação solicitada com SUCESSO!")
             else:
                 print("Esse nome já existe!")
 
         elif opcao == 2:
             nova_qtd = leia_int_positivo("Digite a nova quantidade de faltas: ")
+            sleep(0.3)
             cursor.execute("UPDATE Materias SET qtd_faltas = ? WHERE id = ?;",(nova_qtd,id))
-            print("Operação concluída com SUCESSO!")
+            print("Operação solicitada com SUCESSO!")
 
         elif opcao == 3:
             novo_lim = leia_int_positivo("Digite o novo limite de faltas: ")
+            sleep(0.3)
             cursor.execute("UPDATE Materias SET lim_faltas = ? WHERE id = ?;",(novo_lim,id))
-            print("Operação concluída com SUCESSO!")
+            print("Operação solicitada com SUCESSO!")
 
     else:
         print('Este id não corresponde a nenhuma matéria.')
+    sleep(0.3)
 
 
 def ver_materias_e_faltas(cursor):
@@ -82,17 +96,28 @@ def ver_materias_e_faltas(cursor):
     console.print(tabela)
 
 def registrar_falta(cursor):
+
+    cabecalho("REGISTRO DE FALTAS")
     id = leia_int_positivo("Digite o id da matéria que deseja registrar faltas: ")
+    sleep(0.7)
     if materia_existe_id(cursor, id):
         faltas = leia_int_positivo("Quantas faltas deseja registrar?: ")
+        sleep(0.6)
         cursor.execute("UPDATE Materias SET qtd_faltas = qtd_faltas + ? WHERE id = ?;",(faltas,id))
-        print("Operação concluída com SUCESSO!")
+        print("Operação solicitada com SUCESSO!")
     else:
         print("Este id não corresponde a nenhuma matéria.")
+    sleep(0.6)
 
 def apagar_todos_dados(cursor):
+    cabecalho("ELIMINAÇÃO DE DADOS")
     opcao = confirmar_resposta("Tem certeza que deseja apagar TODOS os dados? [S/N]: ")
+    sleep(0.5)
     if opcao:
         cursor.execute("DELETE FROM Materias;")
         print("DADOS APAGADOS!")
+        sleep(2)
+    else:
+        print("OPERAÇÃO CANCELADA!")
+        sleep(1.5)
     
