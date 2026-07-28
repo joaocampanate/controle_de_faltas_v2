@@ -17,7 +17,7 @@ while True:
             functions.alterar_materia(cursor=cursor1)
 
         elif opcao_escolhida == 3:
-            continue
+            functions.ver_materias_e_faltas(cursor=cursor1)
 
         elif opcao_escolhida == 4:
             functions.registrar_falta(cursor=cursor1)

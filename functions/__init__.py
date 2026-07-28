@@ -1,5 +1,7 @@
 from classes import *
 from interface import leiaInt
+from rich.console import Console
+console = Console()
 
 def criar_tabela_materias(cursor):
     cursor.execute('''CREATE TABLE IF NOT EXISTS Materias (
@@ -64,6 +66,20 @@ def alterar_materia(cursor):
     else:
         print('Este id não corresponde a nenhuma matéria.')
 
+
+def ver_materias_e_faltas(cursor):
+    cursor.execute("SELECT * FROM Materias")
+    linhas = cursor.fetchall()
+    tabela = Table(title='Matérias')
+    tabela.add_column("ID",justify="center",style="blue")
+    tabela.add_column("NOME",justify="center",style="cyan")
+    tabela.add_column("FALTAS",justify="center",style="green")
+    tabela.add_column("LIMITE",justify="center",style="red")
+    for l in linhas:
+        row = (str(l[0]), str(l[1]), str(l[2]), str(l[3]))
+        tabela.add_row(*row)
+    console.print(tabela)
+
 def registrar_falta(cursor):
     id = leiaInt("Digite o id da matéria que deseja registrar faltas: ")
     if materia_existe_id(cursor, id):
@@ -73,4 +89,5 @@ def registrar_falta(cursor):
     else:
         print("Este id não corresponde a nenhuma matéria.")
 
-
+def apagar_todos_dados(cursor):
+    pass

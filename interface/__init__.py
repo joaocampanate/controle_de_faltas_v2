@@ -1,4 +1,5 @@
 from time import sleep
+from rich.table import Table
 
 def cabecalho(txt):
 
