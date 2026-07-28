@@ -79,6 +79,9 @@ def ver_materias_e_faltas(cursor):
         row = (str(l[0]), str(l[1]), str(l[2]), str(l[3]))
         tabela.add_row(*row)
     console.print(tabela)
+    resposta = False
+    while not resposta:
+        resposta = confirmarResposta("Deseja continuar para o programa?[S/N]: ")
 
 def registrar_falta(cursor):
     id = leiaInt("Digite o id da matéria que deseja registrar faltas: ")

@@ -2,6 +2,7 @@ import functions
 import interface
 import sqlite3
 from pathlib import Path
+from time import sleep
 
 BASE_DIR = Path(__file__).resolve().parent
 DB_PATH = BASE_DIR / "data" / "faltas.db"
@@ -15,7 +16,6 @@ while True:
     opcao_escolhida = interface.criarmenu(txt="CONTROLE DE FALTAS V2")
     try:
         if opcao_escolhida == 1:
-            functions.ver_materias_e_faltas(cursor=cursor1)
             functions.registrar_materia(cursor=cursor1)
 
         elif opcao_escolhida == 2:
@@ -38,5 +38,5 @@ while True:
         print(f"Ocorreu um erro : {e}")
     else:
         conexao1.commit()
-    print("\n"*50)
+    print("\n"*10)
 print("Tchau, até mais!")
