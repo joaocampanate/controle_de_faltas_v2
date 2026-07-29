@@ -28,7 +28,7 @@ while True:
                 conexao1.commit()
                 console.clear()
                 functions.ver_materias_e_faltas(cursor=cursor1)
-                resposta = interface.confirmar_resposta("Deseja adicionar mais matérias? [S/N]: ")
+                resposta = interface.confirmar_resposta("Deseja registrar outra matéria? [S/N]: ")
 
         elif opcao_escolhida == 2:
                 resposta = True
@@ -42,7 +42,7 @@ while True:
                         conexao1.commit()
                         console.clear()
                         functions.ver_materias_e_faltas(cursor=cursor1)
-                        resposta = interface.confirmar_resposta("Deseja alterar ou excluir mais matérias? [S/N]: ")
+                        resposta = interface.confirmar_resposta("Deseja alterar ou excluir outra matéria? [S/N]: ")
                     else:
                         console.clear()
                         interface.mensagem_nao_existe_materia()
@@ -85,7 +85,7 @@ while True:
         break
     else:
         conexao1.commit()
-    print("\n"*11)
+    print("\n"*10)
 
 console.clear()
 interface.mensagem_despedida()

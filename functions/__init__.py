@@ -1,5 +1,5 @@
 from time import sleep
-from interface import leia_int_positivo, alterar_materia_opcoes, confirmar_resposta, cabecalho
+from interface import leia_int_positivo, alterar_materia_opcoes, confirmar_resposta, cabecalho, leia_apenas_letras
 from rich.table import Table
 from rich.console import Console
 console = Console()
@@ -13,7 +13,7 @@ def criar_tabela_materias(cursor):
 
 
 def inserir_materia():
-    nome_materia = str(input("Digite o nome da matéria: "))
+    nome_materia = leia_apenas_letras("Digite o nome da matéria: ")
     sleep(0.7)
     limite_faltas = leia_int_positivo("Digite o limite de faltas da matéria: ")
     sleep(0.7)
@@ -51,7 +51,7 @@ def registrar_materia(cursor):
         sleep(0.5)
     else:
         print("Essa matéria já existe no sistema! (use a opção de ALTERAR MATÉRIA caso queira ALTERAR algum dado sobre a matéria.)")
-        sleep(0.5)
+        sleep(3)
 
 
 def alterar_materia(cursor):
@@ -68,6 +68,7 @@ def alterar_materia(cursor):
                 print("Operação solicitada com SUCESSO!")
             else:
                 print("Esse nome já existe!")
+                sleep(2)
 
         elif opcao == 2:
             nova_qtd = leia_int_positivo("Digite a nova quantidade de faltas: ")
@@ -94,7 +95,7 @@ def alterar_materia(cursor):
 
     else:
         print('Este id não corresponde a nenhuma matéria.')
-    sleep(0.3)
+    sleep(2)
 
 
 def ver_materias_e_faltas(cursor):
@@ -122,7 +123,7 @@ def registrar_falta(cursor):
         print("Operação solicitada com SUCESSO!")
     else:
         print("Este id não corresponde a nenhuma matéria.")
-    sleep(0.6)
+    sleep(3)
 
 def apagar_todos_dados(cursor):
     cabecalho("ELIMINAÇÃO DE DADOS")

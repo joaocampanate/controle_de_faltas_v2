@@ -21,19 +21,35 @@ def mensagem_despedida():
     print('-='*30)
     time.sleep(2.5)
 
+def leia_apenas_letras(msg = ''):
+    MIN_CARACTER = 3
+    MAX_CARACTER = 35
+    while True:
+        l = str(input(msg))
+        if len(l) <= 25 and len(l) >= 3:
+            if l.isalpha():
+                return l
+            else:
+                print("Nome inválido, insira apenas letras. ")
+                continue
+        else:
+            print(f"Nome inválido, a quantidade mínima de caracteres é {MIN_CARACTER} e a quantidade máxima é {MAX_CARACTER}.")
 
 def leia_int_positivo(msg = ''):
-
+    MAX_CARACTER = 4
     while True:
         n = str(input(msg))
-        try:
-            n = int(n)
-        except:
-            print('Valor inválido.')
-            continue
+        if len(n) <= MAX_CARACTER:
+            try:
+                n = int(n)
+            except:
+                print('Valor inválido.')
+                continue
+            else:
+                if n >= 0:
+                    return int(n)
         else:
-            if n >= 0:
-                return int(n)
+            print(f"ERRO, número digitado excede o limite de caracteres: {MAX_CARACTER}")
 
 def criar_menu(txt):
 
