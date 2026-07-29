@@ -1,6 +1,7 @@
 import functions
 import interface
 import sqlite3
+import time
 from rich.console import Console
 from pathlib import Path
 console = Console()
@@ -16,7 +17,7 @@ conexao1.commit()
 while True:
     existe_materia = functions.existe_alguma_materia(cursor=cursor1)
     console.clear()
-    opcao_escolhida = interface.criar_menu(txt="CONTROLE DE FALTAS V2")
+    opcao_escolhida = interface.criar_menu(txt="  📌  Controle De Faltas V2  📌")
     try:
         if opcao_escolhida == 1:
             resposta = True
@@ -68,7 +69,7 @@ while True:
                     conexao1.commit()
                     console.clear()
                     functions.ver_materias_e_faltas(cursor=cursor1)
-                    resposta = interface.confirmar_resposta("Deseja registrar mais faltas? [S/N]: ")
+                    resposta = interface.confirmar_resposta("Deseja registrar faltas novamente? [S/N]: ")
             else:
                 console.clear()
                 interface.mensagem_nao_existe_materia()
@@ -82,6 +83,7 @@ while True:
             break
     except Exception as e:
         print(f"Ocorreu um erro : {e}")
+        time.sleep(3)
         break
     else:
         conexao1.commit()

@@ -1,7 +1,8 @@
 from time import sleep
-from interface import leia_int_positivo, alterar_materia_opcoes, confirmar_resposta, cabecalho, leia_apenas_letras
+from interface import leia_int_positivo, alterar_materia_opcoes, confirmar_resposta, cabecalho, leia_apenas_letras, msg_operacao_concluida, msg_operacao_cancelada, msg_erro
 from rich.table import Table
 from rich.console import Console
+from rich import print
 console = Console()
 
 def criar_tabela_materias(cursor):
@@ -13,9 +14,9 @@ def criar_tabela_materias(cursor):
 
 
 def inserir_materia():
-    nome_materia = leia_apenas_letras("Digite o nome da matéria: ")
+    nome_materia = leia_apenas_letras("\n\n Digite o nome da matéria que deseja registrar: ")
     sleep(0.7)
-    limite_faltas = leia_int_positivo("Digite o limite de faltas da matéria: ")
+    limite_faltas = leia_int_positivo("\n\n Digite o limite de faltas da matéria: ")
     sleep(0.7)
     return [nome_materia,0,limite_faltas]
 
@@ -47,11 +48,11 @@ def registrar_materia(cursor):
     materia = inserir_materia()
     if not materia_existe_nome(cursor, materia[0]):
         cursor.execute("INSERT INTO Materias (nome_materia,qtd_faltas,lim_faltas) VALUES (?,?,?);",(materia[0],materia[1],materia[2]))
-        print("Operação solicitada com sucesso!")
+        msg_operacao_concluida()
         sleep(0.5)
     else:
-        print("Essa matéria já existe no sistema! (use a opção de ALTERAR MATÉRIA caso queira ALTERAR algum dado sobre a matéria.)")
-        sleep(3)
+        msg_erro("Essa matéria ja foi registrada. (Use a opção de ALTERAR OU EXCLUIR MATERIA se quiser editá-la)")
+        sleep(4.5)
 
 
 def alterar_materia(cursor):
@@ -65,36 +66,37 @@ def alterar_materia(cursor):
             sleep(0.3)
             if not materia_existe_nome(cursor, novo_nome):
                 cursor.execute("UPDATE Materias SET nome_materia = ? WHERE id = ?;",(novo_nome,id))
-                print("Operação solicitada com SUCESSO!")
+                msg_operacao_concluida()
             else:
-                print("Esse nome já existe!")
+                msg_erro("Esse nome já está registrado em outra matéria")
                 sleep(2)
 
         elif opcao == 2:
-            nova_qtd = leia_int_positivo("Digite a nova quantidade de faltas: ")
+            nova_qtd = leia_int_positivo("\nDigite a nova quantidade de faltas: ")
             sleep(0.3)
             cursor.execute("UPDATE Materias SET qtd_faltas = ? WHERE id = ?;",(nova_qtd,id))
-            print("Operação solicitada com SUCESSO!")
+            msg_operacao_concluida()
 
         elif opcao == 3:
-            novo_lim = leia_int_positivo("Digite o novo limite de faltas: ")
+            novo_lim = leia_int_positivo("\nDigite o novo limite de faltas: ")
             sleep(0.3)
             cursor.execute("UPDATE Materias SET lim_faltas = ? WHERE id = ?;",(novo_lim,id))
-            print("Operação solicitada com SUCESSO!")
+            msg_operacao_concluida()
 
         elif opcao == 4:
-            opcao = confirmar_resposta("Tem certeza que deseja apagar a matéria? [S/N]: ")
+            print("\n ⚠️ [red] Tem certeza que deseja apagar a matéria? [/red]⚠️  [S/N]: ", end='')
+            opcao = confirmar_resposta("")
             sleep(0.3)
             if opcao:
                 cursor.execute("DELETE FROM Materias WHERE id = ?;",(id,))
-                print("MATÉRIA APAGADA!")
+                msg_operacao_concluida()
                 sleep(0.3)
             else:
-                print("OPERAÇÃO CANCELADA!")
+                msg_operacao_cancelada()
                 sleep(0.7)
 
     else:
-        print('Este id não corresponde a nenhuma matéria.')
+        msg_erro("ID não encontrado")
     sleep(2)
 
 
@@ -120,20 +122,21 @@ def registrar_falta(cursor):
         faltas = leia_int_positivo("Quantas faltas deseja registrar?: ")
         sleep(0.6)
         cursor.execute("UPDATE Materias SET qtd_faltas = qtd_faltas + ? WHERE id = ?;",(faltas,id))
-        print("Operação solicitada com SUCESSO!")
+        msg_operacao_concluida()
     else:
-        print("Este id não corresponde a nenhuma matéria.")
+        msg_erro('ID não encontrado')
     sleep(3)
 
 def apagar_todos_dados(cursor):
     cabecalho("ELIMINAÇÃO DE DADOS")
-    opcao = confirmar_resposta("Tem certeza que deseja apagar TODOS os dados? [S/N]: ")
+    print("⚠️ [red] Tem certeza que deseja apagar TODOS os dados? [/red]⚠️  [S/N]: ", end='')
+    opcao = confirmar_resposta("")
     sleep(0.5)
     if opcao:
         cursor.execute("DELETE FROM Materias;")
-        print("DADOS APAGADOS!")
+        msg_operacao_concluida()
         sleep(2)
     else:
-        print("OPERAÇÃO CANCELADA!")
+        msg_operacao_cancelada()
         sleep(1.5)
     
