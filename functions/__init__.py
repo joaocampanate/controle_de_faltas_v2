@@ -1,5 +1,4 @@
 from time import sleep
-from classes import Materia
 from interface import leia_int_positivo, alterar_materia_opcoes, confirmar_resposta, cabecalho
 from rich.table import Table
 from rich.console import Console
@@ -18,8 +17,7 @@ def inserir_materia():
     sleep(0.7)
     limite_faltas = leia_int_positivo("Digite o limite de faltas da matéria: ")
     sleep(0.7)
-    materia = Materia(nome_materia, 0, limite_faltas)
-    return (materia)
+    return [nome_materia,0,limite_faltas]
 
 def existe_alguma_materia(cursor):
     cursor.execute(
@@ -47,8 +45,8 @@ def registrar_materia(cursor):
 
     cabecalho("REGISTRO DE MATÉRIAS")
     materia = inserir_materia()
-    if not materia_existe_nome(cursor, materia.nome):
-        cursor.execute("INSERT INTO Materias (nome_materia,qtd_faltas,lim_faltas) VALUES (?,?,?);",(materia.nome,materia.faltas,materia.lim_faltas))
+    if not materia_existe_nome(cursor, materia[0]):
+        cursor.execute("INSERT INTO Materias (nome_materia,qtd_faltas,lim_faltas) VALUES (?,?,?);",(materia[0],materia[1],materia[2]))
         print("Operação solicitada com sucesso!")
         sleep(0.5)
     else:
