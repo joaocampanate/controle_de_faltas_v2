@@ -85,7 +85,7 @@ while True:
         break
     else:
         conexao1.commit()
-    print("\n"*10)
+    print("\n"*11)
 
 console.clear()
 interface.mensagem_despedida()
