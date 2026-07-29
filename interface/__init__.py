@@ -12,7 +12,7 @@ def mensagem_nao_existe_materia():
     print('-='*30)
     print(f'{txt:^40}')
     print('-='*30)
-    time.sleep(2)
+    time.sleep(2.5)
 
 def leia_int_positivo(msg = ''):
 

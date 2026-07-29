@@ -31,19 +31,22 @@ while True:
                 resposta = interface.confirmar_resposta("Deseja adicionar mais matérias? [S/N]: ")
 
         elif opcao_escolhida == 2:
-            if existe_materia:
                 resposta = True
                 while resposta:
-                    conexao1.commit()
-                    console.clear()
-                    functions.ver_materias_e_faltas(cursor=cursor1)
-                    functions.alterar_materia(cursor=cursor1)
-                    conexao1.commit()
-                    console.clear()
-                    functions.ver_materias_e_faltas(cursor=cursor1)
-                    resposta = interface.confirmar_resposta("Deseja alterar ou excluir mais matérias? [S/N]: ")
-            else:
-                interface.mensagem_nao_existe_materia()
+                    existe_materia = functions.existe_alguma_materia(cursor=cursor1)
+                    if existe_materia:
+                        conexao1.commit()
+                        console.clear()
+                        functions.ver_materias_e_faltas(cursor=cursor1)
+                        functions.alterar_materia(cursor=cursor1)
+                        conexao1.commit()
+                        console.clear()
+                        functions.ver_materias_e_faltas(cursor=cursor1)
+                        resposta = interface.confirmar_resposta("Deseja alterar ou excluir mais matérias? [S/N]: ")
+                    else:
+                        console.clear()
+                        interface.mensagem_nao_existe_materia()
+                        break;
 
         elif opcao_escolhida == 3:
             if existe_materia:
@@ -51,6 +54,7 @@ while True:
                 functions.ver_materias_e_faltas(cursor=cursor1)
                 input("Digite qualquer tecla para continuar: ")
             else:
+                console.clear()
                 interface.mensagem_nao_existe_materia()
 
         elif opcao_escolhida == 4:
@@ -66,6 +70,7 @@ while True:
                     functions.ver_materias_e_faltas(cursor=cursor1)
                     resposta = interface.confirmar_resposta("Deseja registrar mais faltas? [S/N]: ")
             else:
+                console.clear()
                 interface.mensagem_nao_existe_materia()
 
         elif opcao_escolhida == 5:
