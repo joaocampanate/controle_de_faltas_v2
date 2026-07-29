@@ -88,5 +88,5 @@ while True:
     print("\n"*10)
 
 console.clear()
-print("Tchau, até mais!")
+interface.mensagem_despedida()
 conexao1.close()

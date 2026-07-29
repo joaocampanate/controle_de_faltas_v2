@@ -14,6 +14,14 @@ def mensagem_nao_existe_materia():
     print('-='*30)
     time.sleep(2.5)
 
+def mensagem_despedida():
+    txt = "ADEUS, VOLTE SEMPRE!"
+    print('-='*30)
+    print(f'{txt:^40}')
+    print('-='*30)
+    time.sleep(2.5)
+
+
 def leia_int_positivo(msg = ''):
 
     while True:
@@ -37,7 +45,7 @@ def criar_menu(txt):
 
     for e in opcoes:
         cont +=1
-        print(f'{cont} - {e}')
+        print(f'{cont} - {e}\n')
         time.sleep(0.2)
 
     print('-'*20)
@@ -58,7 +66,7 @@ def alterar_materia_opcoes():
 
     for e in opcoes:
         cont +=1
-        print(f'{cont} - {e}')
+        print(f'{cont} - {e}\n')
         time.sleep(0.6)
 
     print('-'*20)
