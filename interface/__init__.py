@@ -8,10 +8,7 @@ def cabecalho(txt):
     print('-='*30)
 
 def mensagem_nao_existe_materia():
-    txt = "NENHUMA MATÉRIA REGISTRADA."
-    print('-='*30)
-    print(f'[red]{txt:^40}[/red]')
-    print('-='*30)
+    msg_erro("Nenhuma matéria registrada")
     time.sleep(2.5)
 
 def mensagem_despedida():
